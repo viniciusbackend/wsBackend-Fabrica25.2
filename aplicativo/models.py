@@ -5,13 +5,14 @@ class Fruta(models.Model):
     nome = models.CharField(max_length=155)
     familia = models.CharField(max_length=155)
     genero = models.CharField(max_length=155)
+    calorias = models.CharField(max_length=155)
 
     def __str__(self):
         return self.nome
     
     @staticmethod
-    def pegar_fruta(nome_fruta):
-        url = f'https://www.fruityvice.com/api/fruit/{nome_fruta}'
+    def pegar_fruta(nome):
+        url = f'https://www.fruityvice.com/api/fruit/{nome}'
         resposta = requests.get(url)
         if resposta.status_code == 200:
             fruta_json = resposta.json()
@@ -20,3 +21,9 @@ class Fruta(models.Model):
                 familia = fruta_json['family'],
                 genero = fruta_json['genus'],
             )
+        else:
+            resposta.raise_for_status()
+        
+
+class Nutricao(models.Model):
+    pass

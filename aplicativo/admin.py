@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Fruta
 
-# Register your models here.
+class FrutaAdmin(admin.ModelAdmin):
+    list_display = ['nome', 'familia', 'genero']
+
+admin.site.register(Fruta, FrutaAdmin)
