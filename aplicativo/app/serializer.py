@@ -7,10 +7,10 @@ class NutricaoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class FrutaSerializer(serializers.ModelSerializer):
-    nutritions = NutricaoSerializer(many=False, read_only=True)
+    nutritions = NutricaoSerializer(many=False)
     class Meta:
         model = Fruta
-        fields = ['name', 'family', 'genus', 'nutritions']
+        fields = ('name', 'family', 'genus', 'nutritions')
 
 
     def create(self, validated_data):
@@ -19,6 +19,15 @@ class FrutaSerializer(serializers.ModelSerializer):
         fruta = Fruta.objects.create(nutritions=nutricao, **validated_data)
 
         return fruta
+    
+    def update(self, instace, validated_data):
+        instace.name = validated_data.get('name', instace.name)
+        instace.family = validated_data.get('famlily', instace.family)
+        instace.genus = validated_data.get('genus', instace.genus)
+        instace.nutritions = validated_data.get('nutritions', instace.nutritions)
+
+        instace.save()
+        return instace
     
     @staticmethod
     def pegar_fruta(nome_fruta):

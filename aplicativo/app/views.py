@@ -4,9 +4,12 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import FrutaSerializer, NutricaoSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class FrutasView(APIView):
+    permission_classes = (IsAuthenticated, )
+
     def get(self, request):
         frutas = Fruta.objects.all()
         serializer = FrutaSerializer(frutas, many=True)
@@ -23,13 +26,15 @@ class FrutasView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class FrutaView(APIView):
+    permission_classes = (IsAuthenticated, )
+    
     def get(self, request, pk):
         fruta = Fruta.objects.get(pk=pk)
         if fruta:
             serializer = FrutaSerializer(fruta)
             return Response(serializer.data)
         else:
-            raise Exception("Fruta não existe")
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk):
         fruta = Fruta.objects.get(pk=pk)
@@ -47,3 +52,4 @@ class FrutaView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        

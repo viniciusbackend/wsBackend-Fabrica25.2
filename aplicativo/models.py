@@ -8,7 +8,7 @@ class Nutricao(models.Model):
     protein = models.CharField(max_length=155)
 
     def __str__(self):
-        return f"{self.fruta}"
+        return self.calories
 
 class Fruta(models.Model):
     name = models.CharField(max_length=155, unique=True)
@@ -18,4 +18,4 @@ class Fruta(models.Model):
 
 
     def __str__(self):
-        return self.nome
+        return self.name
