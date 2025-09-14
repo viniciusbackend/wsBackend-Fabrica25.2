@@ -20,14 +20,18 @@ class FrutaSerializer(serializers.ModelSerializer):
 
         return fruta
     
-    def update(self, instace, validated_data):
-        instace.name = validated_data.get('name', instace.name)
-        instace.family = validated_data.get('famlily', instace.family)
-        instace.genus = validated_data.get('genus', instace.genus)
-        instace.nutritions = validated_data.get('nutritions', instace.nutritions)
+    def update(self, instance, validated_data):
+        nutrition_data = validated_data.pop('nutritions', None)
+        instance = super().update(instance, validated_data)
 
-        instace.save()
-        return instace
+        if nutrition_data:
+            nutrition_instacia = instance.nutritions
+            if nutrition_instacia:
+                for attr, value in nutrition_data.items():
+                    setattr(nutrition_instacia, attr, value)
+                nutrition_instacia.save()
+        return instance
+    
     
     @staticmethod
     def pegar_fruta(nome_fruta):
