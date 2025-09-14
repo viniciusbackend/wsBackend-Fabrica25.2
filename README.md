@@ -44,6 +44,15 @@ python manage.py runserver
 
 🛣️ Endpoints da API
 
+Autenticação
+
+    POST /token/ - Caminho para pegar o token de validação
+    deve ser passado o username e o password do superuser em formato json
+    em seguida deve passar no header do método a ser utilizado na key: Authorization e no value: Bearer tokendeacesso
+
+    POST /token/refresh/ - Caminho para pegar o token de validação refresh(ele tem um tempo maior para expirar)
+
+
 [Entidade Fruta]
 
     GET /api/frutas - Lista todas as frutas
