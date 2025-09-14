@@ -21,26 +21,22 @@ venv\Scripts\activate  # Windows
 
     Instale as dependências:
 
-bash
-
+pip install -r requirements.txt
 
     Execute as migrações:
 
-bash
 
 python manage.py migrate
 
     Crie um superusuário:
 
-bash
 
 python manage.py createsuperuser
 
     Execute o servidor de desenvolvimento:
 
-bash
-
 python manage.py runserver
+
 
 🛣️ Endpoints da API
 
