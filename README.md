@@ -48,7 +48,7 @@ python manage.py runserver
 
     GET /api/frutas - Lista todas as frutas
 
-     POST /api/frutas - Cria uma nova fruta de acordo com o nome da fruta e preencha as informações automaticamente
+    POST /api/frutas - Cria uma nova fruta e de acordo com o nome da fruta é preenchida as todas as informações
 
     GET /api/fruta/id - Retorna uma fruta especifica
 
