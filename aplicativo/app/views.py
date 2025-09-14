@@ -24,10 +24,17 @@ class FrutasView(APIView):
             return Response(fruta.data, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request):
+        fruta = Fruta.objects.all()
+        if fruta:
+            fruta.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 class FrutaView(APIView):
     permission_classes = (IsAuthenticated, )
-    
+
     def get(self, request, pk):
         fruta = Fruta.objects.get(pk=pk)
         if fruta:
