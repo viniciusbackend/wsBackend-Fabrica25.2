@@ -1,6 +1,6 @@
 Api de informações de frutas
 
-Uma API RESTful desenvolvida em Django e Django REST Framework com informações das frutas.
+Uma API REST desenvolvida em Django e Django REST Framework com informações de Frutas.
 
 🚀 Instalação
 
@@ -44,7 +44,7 @@ python manage.py runserver
 
 🛣️ Endpoints da API
 
-Autenticação
+Autenticação com simple_jwt
 
     POST /token/ - Caminho para pegar o token de validação
     deve ser passado o username e o password do superuser em formato json
